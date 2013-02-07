@@ -1,0 +1,10 @@
+!!!
+%html{lang: I18n.locale}
+  %head
+    = render 'friendly_admin/layout/head'
+  %body{style: 'padding-top: 40px;'}
+    = render 'friendly_admin/layout/navbar'
+    .container
+      = render 'friendly_admin/layout/flash'
+      = yield
+    = javascript_include_tag 'friendly_admin'

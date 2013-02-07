@@ -1,0 +1,5 @@
+%ul.nav
+  %li
+    /= link_to bs_icon(:home, :class => 'icon-white', :title => I18n.t('labels.admin.go_to_root')), '/'
+  %li
+    /= link_to bs_icon(:off, :class => 'icon-white', :title => I18n.t('labels.admin.logout')), user_session_path, method: :delete

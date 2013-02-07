@@ -1,0 +1,5 @@
+= simple_form_for resource, url: url_for([:admin, resource]) do |f|
+  - resource.class.column_names.each do |column|
+    - next if column == 'id'
+    = f.input column
+  = f.button :submit

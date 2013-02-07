@@ -1,0 +1,2 @@
+- if controller.respond_to?(:new) && not(action_name.in?('new', 'create'))
+  = link_to '<i class="icon-plus"></i> New'.html_safe, url_for(action: :new), class: 'btn'
