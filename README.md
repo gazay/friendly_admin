@@ -51,6 +51,7 @@ Authors
 Temporary sample trash
 ----------------------
 
+```
 Controller
 
 class Admin::UsersController < Admin::BaseController
@@ -166,3 +167,4 @@ _table.html.haml
         %td
           .pull-right
             = friendly_resource_action(:edit, row)
+```
