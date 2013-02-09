@@ -21,7 +21,7 @@ module FriendlyAdmin
       # It looks at:
       #   - current controller folder
       #   - app/views/#{namespace}/#{base controller name}
-      #   - app/views/namespace/friendly_admin
+      #   - app/views/friendly_admin
       #   - gem view folder
       def lookup_friendly_admin_templates
         self.lookup_context.prefixes << "#{controller_namespace}/friendly_admin"

@@ -1,0 +1,16 @@
+en:
+  friendly_admin:
+    defaults:
+      header: Friendly Admin
+      new: Add new
+      destroy: Destroy
+      batch: Checked...
+      cancel: Cancel
+
+  # Simple form
+  helpers:
+    submit:
+      create: Create
+      update: Save
+      submit: Save
+

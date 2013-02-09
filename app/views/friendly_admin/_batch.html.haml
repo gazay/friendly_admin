@@ -1,7 +1,7 @@
 .btn-group
   %a.btn.dropdown-toggle{data: {toggle: 'dropdown'}}
-    Batch
+    = friendly_t(:batch)
     %span.caret
   %ul.dropdown-menu
     %li
-      %a{href: '#'} Destroy
+      %a{href: '#'}= friendly_t(:destroy)

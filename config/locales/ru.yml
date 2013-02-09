@@ -1,0 +1,16 @@
+ru:
+  friendly_admin:
+    defaults:
+      header: Friendly Admin
+      new: Добавить
+      destroy: Удалить
+      batch: Отмеченные...
+      cancel: Отменить
+
+  # Simple form
+  helpers:
+    submit:
+      create: 'Создать'
+      update: 'Сохранить'
+      submit: 'Сохранить'
+

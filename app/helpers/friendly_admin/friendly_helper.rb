@@ -5,9 +5,18 @@ module FriendlyAdmin
     def friendly_menu_item(label, path)
       state = path_state(url_for(path))
 
-      if label.is_a?(Symbol)
-        label = label.to_s.singularize.classify.constantize.model_name.human
+      begin
+        if label.is_a?(Symbol)
+          default_label = label.to_s.singularize.classify.constantize.model_name.human
+        end
+      rescue nil
       end
+
+      label = friendly_t(
+        label,
+        default: default_label,
+        count: 1
+      )
 
       content_tag :li, :class => ('active' unless state == :inactive) do
         link_to(label, path)
@@ -49,20 +58,32 @@ module FriendlyAdmin
       end
     end
 
-    def friendly_resource_title
-      I18n.t(
-        "#{controller.controller_path}/#{controller.action_name}",
-        scope: 'controllers',
-        default: resource_class.model_name.human
+    def friendly_t(key, options = {})
+      options[:default] ||= []
+      options[:default] = Array.wrap(options[:default])
+
+      controller_path_dotted = controller_path.gsub('/', '.')
+
+      options[:default].unshift(:"defaults.#{key}")
+      options[:default].unshift(:"#{controller_path_dotted}.defaults.#{key}")
+      options[:default].unshift(:"#{controller_path}.#{action_name}.#{key}")
+      options[:default].unshift(:"#{controller_path_dotted}.#{action_name}.#{key}")
+
+      options[:scope] = ['friendly_admin', options[:scope]].compact.flatten
+
+      t(
+        key,
+        options
       )
     end
 
-    def friendly_form_actions
+    def friendly_simple_form_actions(f)
       %{
         <div class="form-actions">
-          #{submit_tag :save, class: 'btn btn-primary'}
-          or
-          #{link_to :cancel, collection_url}
+          #{f.button :submit, class: 'btn btn-primary'}
+          &nbsp;
+          &nbsp;
+          #{link_to friendly_t(:cancel), collection_url}
         </div>
       }.html_safe
     end

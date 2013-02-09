@@ -1,5 +1,5 @@
 .page-header
   %h1
-    = @title || friendly_resource_title
+    = @title || friendly_t('title', default: resource_class.model_name.human, scope: 'controllers')
     .pull-right
       = render 'header_actions'
