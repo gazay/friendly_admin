@@ -5,6 +5,7 @@ module FriendlyAdmin
       if content || block_given?
         piece.clear
         piece.push(content || block)
+        nil
       else
         piece.map { |piece|
           piece.respond_to?(:call) ? capture(&piece) : piece

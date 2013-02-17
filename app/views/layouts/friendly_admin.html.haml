@@ -1,12 +1,3 @@
-= render 'friendly_admin/layout/defaults'
-= render 'friendly_admin/layout/friendly_admin'
-!!!
-%html{lang: I18n.locale}
-  = friendly_piece(:head)
-  %body{style: 'padding-top: 40px;'}
-    = friendly_piece(:navbar)
-    .container
-      = friendly_piece(:flash)
-      = yield
-    = friendly_piece(:footer)
-    = javascript_include_tag 'friendly_admin'
+- render 'friendly_admin/layout/defaults'
+- render 'friendly_admin/layout/friendly_admin'
+= friendly_piece(:layout)

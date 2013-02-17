@@ -1,2 +1,34 @@
-= friendly_component :test do
-  - Rails.logger.info 'called base'
+- friendly_piece :index do
+  / friendly_piece :index
+  = friendly_piece(:header)
+  = friendly_piece(:batch_and_pagination)
+  = friendly_piece(:table)
+  = friendly_piece(:batch_and_pagination)
+
+- friendly_piece :pagination do
+  / friendly_piece :pagination
+  - if collection.respond_to?(:total_pages)
+    - if defined?(Kaminari)
+      = paginate collection, theme: 'twitter-bootstrap', window: 5
+  -# TODO: will_paginate + will_paginate_link_renderer
+
+- friendly_piece :batch do
+  / friendly_piece :batch
+  .btn-group
+    %a.btn.dropdown-toggle{data: {toggle: 'dropdown'}}
+      = friendly_t(:batch)
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a{href: '#'}= friendly_t(:destroy)
+
+- friendly_piece :batch_and_pagination do
+  / friendly_piece :batch_and_pagination
+  .row.batch_and_pagination
+    .span2
+      = friendly_piece :batch
+    .span10
+      = friendly_piece :pagination
+
+- friendly_piece :table do
+  Define your table in #{controller_path}/_index.html.haml with friendly_piece(:table)

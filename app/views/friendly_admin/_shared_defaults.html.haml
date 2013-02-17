@@ -1,0 +1,21 @@
+- friendly_piece :header do
+  / friendly_piece :header
+  .page-header
+    %h1
+      = @title || friendly_t('title', default: resource_class.model_name.human, scope: 'controllers')
+      .pull-right
+        = friendly_piece :header_actions
+
+- friendly_piece :header_actions do
+  / friendly_piece :header_actions
+  - if controller.respond_to?(:new) && not(action_name.in?('new', 'create'))
+    = link_to %{ <i class="icon-plus"></i> #{friendly_t(:new)} }.html_safe,
+      url_for(action: :new), class: 'btn'
+
+- friendly_piece :form do
+  / friendly_piece :header_actions
+  = simple_form_for resource, url: url_for([:admin, resource]) do |f|
+    - resource.class.column_names.each do |column|
+      - next if column == 'id'
+      = f.input column
+    = f.button :submit

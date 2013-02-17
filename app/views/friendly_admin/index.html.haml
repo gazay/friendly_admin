@@ -1,6 +1,5 @@
-= render 'header'
-= render 'filters'
-= render 'scopes'
-= render 'batch_and_pagination'
-= render 'table'
-= render 'batch_and_pagination'
+- render 'friendly_admin/shared_defaults'
+- render 'friendly_admin/index_defaults'
+- render 'shared'
+- render 'index'
+= friendly_piece(:index)

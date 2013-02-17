@@ -1,4 +1,18 @@
+- friendly_piece :layout do
+  !!!
+  / friendly_piece :layout
+  %html{lang: I18n.locale}
+    = friendly_piece(:head)
+    %body{style: 'padding-top: 40px;'}
+      = friendly_piece(:navbar)
+      .container
+        = friendly_piece(:flash)
+        = yield
+      = friendly_piece(:footer)
+      = javascript_include_tag 'friendly_admin'
+
 - friendly_piece :head do
+  / friendly_piece :head
   %head
     = tag :meta, :charset => 'utf-8'
     %title= @title || friendly_t('title', default: resource_class.model_name.human)
@@ -7,6 +21,7 @@
     = stylesheet_link_tag 'friendly_admin'
 
 - friendly_piece :navbar do
+  / friendly_piece :navbar
   .navbar.navbar-fixed-top
     .navbar-inner
       .container
@@ -17,10 +32,12 @@
           = friendly_piece(:right_navigation)
 
 - friendly_piece :navigation do
-  Create #{controller_namespace}/friendly_admin/layout/_overrides.html.haml
-  and override navigation (friendly_piece :navigation)
+  / friendly_piece :navigation
+  Define your navigation in #{controller_namespace}/friendly_admin/layout/_overrides.html.haml
+  with friendly_piece :navigation
 
 - friendly_piece :right_navigation do
+  / friendly_piece :right_navigation
   %ul.nav
     %li
       / = link_to bs_icon(:home, :class => 'icon-white', :title => I18n.t('labels.admin.go_to_root')), '/'
@@ -28,4 +45,6 @@
       /= link_to bs_icon(:off, :class => 'icon-white', :title => I18n.t('labels.admin.logout')), user_session_path, method: :delete
 
 - friendly_piece :footer do
-  &copy; Time.zone.now.year
+  / friendly_piece :footer
+  .container
+    &copy; #{Time.zone.now.year}
