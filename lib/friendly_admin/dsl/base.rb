@@ -4,11 +4,10 @@ module FriendlyAdmin
       extend ActiveSupport::Concern
 
       included do
-        inherit_resources
         layout 'friendly_admin'
 
-        prepend_before_filter :lookup_friendly_admin_templates
-        helper_method :controller_namespace
+        prepend_before_filter :lookup_default_template
+        helper_method         :controller_namespace
       end
 
       # Current controller namespace
@@ -18,14 +17,20 @@ module FriendlyAdmin
 
       private
       # Sets folder precedence to lookup admin template overrides for.
-      # It looks at:
-      #   - current controller folder
-      #   - app/views/#{namespace}/#{base controller name}
+      # For example, any template or partial at Admin::UserController#index
+      # it looks at:
+      #   - app/views/admin/users
+      #   - app/views/admin/friendly_admin
       #   - app/views/friendly_admin
-      #   - gem view folder
-      def lookup_friendly_admin_templates
-        self.lookup_context.prefixes << "#{controller_namespace}/friendly_admin"
-        self.lookup_context.prefixes << 'friendly_admin'
+      #   - gem
+      def lookup_default_template
+        lookup_context.view_paths.unshift(
+          File.join(
+            Rails.application.paths['app/views'].expanded.first,
+            controller_namespace
+          )
+        )
+        lookup_context.prefixes << 'friendly_admin'
       end
     end
   end
